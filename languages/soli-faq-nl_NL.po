@@ -1,0 +1,89 @@
+# Copyright (C) 2026 Joran Out
+# This file is distributed under the same license as the Soli FAQ Plugin plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Soli FAQ Plugin 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-soli-faq-plugin\n"
+"Last-Translator: Joran Out\n"
+"Language-Team: Dutch\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2026-08-07T19:44:58+00:00\n"
+"PO-Revision-Date: 2026-08-07 21:00+0100\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: soli-faq\n"
+
+#. Plugin Name of the plugin
+#: wp-soli-faq-plugin.php
+msgid "Soli FAQ Plugin"
+msgstr "Soli FAQ Plugin"
+
+#. Description of the plugin
+#: wp-soli-faq-plugin.php
+msgid "Members-only frequently asked questions (FAQs) post type for Soli sites, usable in the Query Loop block"
+msgstr "Berichttype voor veelgestelde vragen die alleen voor leden zichtbaar zijn, te gebruiken in het Query Loop-blok"
+
+#. Author of the plugin
+#: wp-soli-faq-plugin.php
+msgid "Joran Out"
+msgstr "Joran Out"
+
+#: includes/class-soli-faq-post-type.php:25
+#: build/index.js:1
+msgid "FAQs"
+msgstr "FAQ's"
+
+#: includes/class-soli-faq-post-type.php:26
+msgid "FAQ"
+msgstr "FAQ"
+
+#: includes/class-soli-faq-post-type.php:27
+msgid "Add FAQ"
+msgstr "FAQ toevoegen"
+
+#: includes/class-soli-faq-post-type.php:28
+msgid "Add New FAQ"
+msgstr "Nieuwe FAQ toevoegen"
+
+#: includes/class-soli-faq-post-type.php:29
+msgid "View FAQ"
+msgstr "FAQ bekijken"
+
+#: includes/class-soli-faq-post-type.php:30
+msgid "Edit FAQ"
+msgstr "FAQ bewerken"
+
+#: includes/class-soli-faq-post-type.php:31
+msgid "Insert into FAQ"
+msgstr "In FAQ invoegen"
+
+#: includes/class-soli-faq-post-type.php:32
+msgid "Search FAQs"
+msgstr "FAQ's zoeken"
+
+#: includes/class-soli-faq-post-type.php:33
+msgid "No FAQs Found"
+msgstr "Geen FAQ's gevonden"
+
+#: includes/class-soli-faq-post-type.php:40
+msgid "Members-only frequently asked questions"
+msgstr "Veelgestelde vragen alleen voor leden"
+
+#: includes/class-soli-faq-visibility.php:80
+msgid "FAQs are only visible to members. Please log in to view them."
+msgstr "FAQ's zijn alleen zichtbaar voor leden. Log in om ze te bekijken."
+
+#: includes/class-soli-faq-visibility.php:81
+msgid "Forbidden"
+msgstr "Verboden"
+
+#: includes/class-soli-faq-visibility.php:107
+msgid "FAQs are only visible to members."
+msgstr "FAQ's zijn alleen zichtbaar voor leden."
+
+#: build/index.js:1
+msgid "Displays the latest FAQs (members-only frequently asked questions)."
+msgstr "Toont de nieuwste FAQ's (alleen zichtbaar voor leden)."
