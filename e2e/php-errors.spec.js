@@ -20,7 +20,13 @@ const OWN_FILES =
 	/(Warning|Notice|Deprecated):[^\n]*(wp-soli-faq-plugin\.php|class-soli-faq-(post-type|visibility)\.php)/i;
 
 async function expectNoPhpErrors(page) {
-	const body = await page.locator('body').innerText();
+	// textContent(), never innerText(). innerText() reflects *rendered* text,
+	// so it silently drops anything inside an element that ships hidden
+	// (display:none until JS reveals it) — and the block editor screen is full
+	// of those. A diagnostic emitted there would be invisible to innerText()
+	// and the assertion would pass while the page is broken. textContent()
+	// reads the DOM regardless of styling. Do not change this back.
+	const body = await page.locator('body').textContent();
 	expect(body).not.toMatch(FATAL);
 	expect(body).not.toMatch(OWN_FILES);
 }
