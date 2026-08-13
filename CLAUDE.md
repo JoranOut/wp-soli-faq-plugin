@@ -47,8 +47,9 @@ Note: REST cookie auth without an `X-WP-Nonce` header counts as logged out
 (post type preset, newest first, post-template with title/date/excerpt,
 query-no-results). Built with `wp-scripts build` to `build/index.js`.
 
-**`build/` and the compiled `languages/` files are committed** — the GitHub
-updater installs the `main` branch zip, so shipped artifacts must be in the repo.
+**`build/` and the compiled `languages/` files are committed** — `publish.js`
+zips what is on disk and the GitHub updater installs that release zip asset,
+so shipped artifacts must be in the repo.
 Run `npm run build` before committing JS changes.
 
 ## Development
