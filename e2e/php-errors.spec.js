@@ -20,15 +20,39 @@ const OWN_FILES =
 	/(Warning|Notice|Deprecated):[^\n]*(wp-soli-faq-plugin\.php|class-soli-faq-(post-type|visibility)\.php)/i;
 
 async function expectNoPhpErrors(page) {
-	// textContent(), never innerText(). innerText() reflects *rendered* text,
-	// so it silently drops anything inside an element that ships hidden
+	// textContent, never innerText. innerText reflects *rendered* text, so it
+	// silently drops anything inside an element that ships hidden
 	// (display:none until JS reveals it) — and the block editor screen is full
-	// of those. A diagnostic emitted there would be invisible to innerText()
-	// and the assertion would pass while the page is broken. textContent()
+	// of those. A diagnostic emitted there would be invisible to innerText
+	// and the assertion would pass while the page is broken. textContent
 	// reads the DOM regardless of styling. Do not change this back.
-	const body = await page.locator('body').textContent();
-	expect(body).not.toMatch(FATAL);
-	expect(body).not.toMatch(OWN_FILES);
+	//
+	// The two patterns need *different* reads, so take both in one evaluate:
+	//
+	// - OWN_FILES matches within a single line (`[^\n]*`), and textContent
+	//   includes the source text of <script>. wp-admin prints large one-line
+	//   JSON blobs into inline script, so a string containing `Warning:` near
+	//   a plugin path would match and turn CI red for nothing. That pattern
+	//   must NOT see script text, so it reads a body clone with
+	//   script/style/template/noscript stripped.
+	// - FATAL must see script text: a fatal thrown while an inline script is
+	//   being printed lands inside that <script> node, and a stripped clone
+	//   would lose it. `Fatal error`/`Parse error` are also far less likely
+	//   than `Warning:` to appear in script text by accident.
+	const { full, markup } = await page.evaluate(() => {
+		const clone = document.body.cloneNode(true);
+		clone
+			.querySelectorAll('script, style, template, noscript')
+			.forEach((node) => node.remove());
+
+		return {
+			full: document.body.textContent || '',
+			markup: clone.textContent || '',
+		};
+	});
+
+	expect(full).not.toMatch(FATAL);
+	expect(markup).not.toMatch(OWN_FILES);
 }
 
 test.describe('renders without PHP errors', () => {
