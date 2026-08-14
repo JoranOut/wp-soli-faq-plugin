@@ -44,8 +44,12 @@ add_action( 'init', function () {
 			// GitHub releases API and overrides this with the release's zip asset.
 			'zip_url'            => 'https://github.com/JoranOut/wp-soli-faq-plugin/releases/latest/download/wp-soli-faq-plugin.zip',
 			'sslverify'          => true,
-			'requires'           => '6.0.0',
-			'tested'             => '6.7.0',
+			// Both ends of the supported range are rewritten at packaging time by
+			// the nightly and release workflows, from the two WordPress versions
+			// test.yml actually ran a leg against. Do not reformat.
+			'requires'           => '6.9', // oldest branch the e2e suite covers; see package.json wordpress.requiresAtLeast
+			'tested'             => '7.0.4', // newest release the e2e suite covers
+
 			'readme'             => 'readme.md',
 		);
 
