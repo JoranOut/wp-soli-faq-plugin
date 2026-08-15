@@ -48,7 +48,7 @@ class Post_Type {
 			'menu_position'       => 7,
 			'menu_icon'           => 'dashicons-editor-help',
 			'can_export'          => true,
-			'has_archive'         => true,
+			'has_archive'         => false,
 			// Not-logged-in visitors may never find FAQs through site
 			// search; the flag is evaluated per request so members still can.
 			'exclude_from_search' => ! is_user_logged_in(),
