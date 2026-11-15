@@ -61,6 +61,18 @@ add_action( 'init', function () {
 $soli_faq_post_type = new Post_Type();
 $soli_faq_post_type->init();
 
+// Activation runs after init, so register the post type before flushing. Without
+// the flush its pretty-permalink URLs 404 until permalinks are re-saved.
+register_activation_hook( __FILE__, function () use ( $soli_faq_post_type ) {
+	$soli_faq_post_type->register_post_type();
+	flush_rewrite_rules();
+} );
+
+register_deactivation_hook( __FILE__, function () {
+	unregister_post_type( Post_Type::POST_TYPE );
+	flush_rewrite_rules();
+} );
+
 // Keep FAQs invisible to not-logged-in visitors
 $soli_faq_visibility = new Visibility();
 $soli_faq_visibility->init();
