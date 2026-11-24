@@ -4,6 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Soli FAQ Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-soli-faq-plugin\n"
+"POT-Creation-Date: 2026-11-24T16:30:00+00:00\n"
+"PO-Revision-Date: 2026-08-07 21:00+0100\n"
 "Last-Translator: Joran Out\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
@@ -11,10 +13,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: 2026-08-07T19:44:58+00:00\n"
-"PO-Revision-Date: 2026-08-07 21:00+0100\n"
-"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: soli-faq\n"
+"X-Generator: WP-CLI 2.12.0\n"
 
 #. Plugin Name of the plugin
 #: wp-soli-faq-plugin.php
@@ -31,59 +31,209 @@ msgstr "Berichttype voor veelgestelde vragen die alleen voor leden zichtbaar zij
 msgid "Joran Out"
 msgstr "Joran Out"
 
-#: includes/class-soli-faq-post-type.php:25
-#: build/index.js:1
+#. translators: %s: login URL
+#: build/search/render.php:30
+#, php-format
+msgid "The frequently asked questions are for members only. <a href=\"%s\">Log in</a> to read them."
+msgstr "De veelgestelde vragen zijn alleen voor leden. <a href=\"%s\">Log in</a> om ze te lezen."
+
+#. translators: %s: login URL
+#: build/search/render.php:43
+#, php-format
+msgid "Some questions are for members only. <a href=\"%s\">Log in</a> to see them all."
+msgstr "Een deel van de vragen is alleen voor leden. <a href=\"%s\">Log in</a> om alles te zien."
+
+#: build/search/render.php:71 build/search/render.php:72
+#, php-format
+msgid "%1$s question"
+msgid_plural "%1$s questions"
+msgstr[0] "%1$s vraag"
+msgstr[1] "%1$s vragen"
+
+#. translators: 1: number of questions, 2: search query
+#: build/search/render.php:74 build/search/render.php:76
+#, php-format
+msgid "%1$s question matching “%2$s”"
+msgid_plural "%1$s questions matching “%2$s”"
+msgstr[0] "%1$s vraag met “%2$s”"
+msgstr[1] "%1$s vragen met “%2$s”"
+
+#. translators: %s: topic name
+#: build/search/render.php:78
+#, php-format
+msgid "in %s"
+msgstr "in %s"
+
+#: build/search/render.php:79
+msgid "show all topics"
+msgstr "alle onderwerpen tonen"
+
+#: build/search/render.php:80
+msgid "Read the answer"
+msgstr "Lees het antwoord"
+
+#. translators: %s: date
+#: build/search/render.php:82
+#, php-format
+msgid "Updated %s"
+msgstr "Bijgewerkt %s"
+
+#. translators: %s: search query
+#: build/search/render.php:84
+#, php-format
+msgid "No questions matching “%s”"
+msgstr "Geen vragen met “%s”"
+
+#: build/search/render.php:85
+msgid "Try a different or shorter word, or pick another topic."
+msgstr "Probeer een ander of korter woord, of kies een ander onderwerp."
+
+#: build/search/render.php:86
+msgid "There are no frequently asked questions yet."
+msgstr "Er zijn nog geen veelgestelde vragen."
+
+#: build/search/render.php:105
+msgid "Search the FAQs"
+msgstr "Zoek in de veelgestelde vragen"
+
+#: build/search/render.php:112
+msgid "Search for a word, for example uniform or membership fee"
+msgstr "Zoek op een woord, bijvoorbeeld uniform of contributie"
+
+#: build/search/render.php:118
+msgid "Search"
+msgstr "Zoeken"
+
+#: build/search/render.php:126 build/search/render.php:127
+#: includes/class-soli-faq-post-type.php:77
+msgid "Topics"
+msgstr "Onderwerpen"
+
+#: build/search/render.php:134
+msgid "All topics"
+msgstr "Alle onderwerpen"
+
+#: includes/class-soli-faq-post-type.php:30 build/index.js:1
 msgid "FAQs"
 msgstr "FAQ's"
 
-#: includes/class-soli-faq-post-type.php:26
+#: includes/class-soli-faq-post-type.php:31
 msgid "FAQ"
 msgstr "FAQ"
 
-#: includes/class-soli-faq-post-type.php:27
+#: includes/class-soli-faq-post-type.php:32
 msgid "Add FAQ"
 msgstr "FAQ toevoegen"
 
-#: includes/class-soli-faq-post-type.php:28
+#: includes/class-soli-faq-post-type.php:33
 msgid "Add New FAQ"
 msgstr "Nieuwe FAQ toevoegen"
 
-#: includes/class-soli-faq-post-type.php:29
+#: includes/class-soli-faq-post-type.php:34
 msgid "View FAQ"
 msgstr "FAQ bekijken"
 
-#: includes/class-soli-faq-post-type.php:30
+#: includes/class-soli-faq-post-type.php:35
 msgid "Edit FAQ"
 msgstr "FAQ bewerken"
 
-#: includes/class-soli-faq-post-type.php:31
+#: includes/class-soli-faq-post-type.php:36
 msgid "Insert into FAQ"
 msgstr "In FAQ invoegen"
 
-#: includes/class-soli-faq-post-type.php:32
+#: includes/class-soli-faq-post-type.php:37
 msgid "Search FAQs"
 msgstr "FAQ's zoeken"
 
-#: includes/class-soli-faq-post-type.php:33
+#: includes/class-soli-faq-post-type.php:38
 msgid "No FAQs Found"
 msgstr "Geen FAQ's gevonden"
 
-#: includes/class-soli-faq-post-type.php:40
+#: includes/class-soli-faq-post-type.php:46
 msgid "Members-only frequently asked questions"
 msgstr "Veelgestelde vragen alleen voor leden"
 
-#: includes/class-soli-faq-visibility.php:80
+#: includes/class-soli-faq-post-type.php:78
+msgid "Topic"
+msgstr "Onderwerp"
+
+#: includes/class-soli-faq-post-type.php:79
+msgid "All Topics"
+msgstr "Alle onderwerpen"
+
+#: includes/class-soli-faq-post-type.php:80
+msgid "Edit Topic"
+msgstr "Onderwerp bewerken"
+
+#: includes/class-soli-faq-post-type.php:81
+msgid "Add New Topic"
+msgstr "Nieuw onderwerp toevoegen"
+
+#: includes/class-soli-faq-post-type.php:82
+msgid "Search Topics"
+msgstr "Onderwerpen zoeken"
+
+#: includes/class-soli-faq-post-type.php:83
+msgid "No Topics Found"
+msgstr "Geen onderwerpen gevonden"
+
+#: includes/class-soli-faq-visibility.php:110
 msgid "FAQs are only visible to members. Please log in to view them."
 msgstr "FAQ's zijn alleen zichtbaar voor leden. Log in om ze te bekijken."
 
-#: includes/class-soli-faq-visibility.php:81
+#: includes/class-soli-faq-visibility.php:111
 msgid "Forbidden"
 msgstr "Verboden"
 
-#: includes/class-soli-faq-visibility.php:107
+#: includes/class-soli-faq-visibility.php:139
 msgid "FAQs are only visible to members."
 msgstr "FAQ's zijn alleen zichtbaar voor leden."
 
 #: build/index.js:1
+msgid "Members only"
+msgstr "Alleen voor leden"
+
+#: build/index.js:1
+msgid "Only logged-in members can read this question."
+msgstr "Alleen ingelogde leden kunnen deze vraag lezen."
+
+#: build/index.js:1
+msgid "Everyone can read this question, also without logging in."
+msgstr "Iedereen kan deze vraag lezen, ook zonder in te loggen."
+
+#: build/index.js:1
 msgid "Displays the latest FAQs (members-only frequently asked questions)."
 msgstr "Toont de nieuwste FAQ's (alleen zichtbaar voor leden)."
+
+#: build/search/index.js:1
+msgid "Settings"
+msgstr "Instellingen"
+
+#: build/search/index.js:1
+msgid "Show topic filter"
+msgstr "Onderwerpfilter tonen"
+
+#: build/search/block.json
+msgctxt "block title"
+msgid "FAQ search"
+msgstr "FAQ zoeken"
+
+#: build/search/block.json
+msgctxt "block description"
+msgid "Search field, topic filter and results for the members-only FAQs."
+msgstr "Zoekveld, onderwerpfilter en resultaten voor de veelgestelde vragen voor leden."
+
+#: build/search/block.json
+msgctxt "block keyword"
+msgid "faq"
+msgstr "faq"
+
+#: build/search/block.json
+msgctxt "block keyword"
+msgid "veelgestelde vragen"
+msgstr "veelgestelde vragen"
+
+#: build/search/block.json
+msgctxt "block keyword"
+msgid "zoeken"
+msgstr "zoeken"

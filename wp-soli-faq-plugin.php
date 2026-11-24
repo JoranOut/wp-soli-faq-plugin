@@ -23,6 +23,7 @@ define( 'SOLI_FAQ__PLUGIN_VERSION', '0.1.0' );
 
 require_once SOLI_FAQ__PLUGIN_DIR_PATH . 'includes/class-soli-faq-post-type.php';
 require_once SOLI_FAQ__PLUGIN_DIR_PATH . 'includes/class-soli-faq-visibility.php';
+require_once SOLI_FAQ__PLUGIN_DIR_PATH . 'includes/class-soli-faq-search.php';
 
 add_action( 'init', function () {
 	load_plugin_textdomain( 'soli-faq', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -76,3 +77,7 @@ register_deactivation_hook( __FILE__, function () {
 // Keep FAQs invisible to not-logged-in visitors
 $soli_faq_visibility = new Visibility();
 $soli_faq_visibility->init();
+
+// FAQ search block
+$soli_faq_search = new Search();
+$soli_faq_search->init();

@@ -1,9 +1,11 @@
 /**
  * Registers a "FAQs" variation of the core Query Loop block,
- * preconfigured to list the newest FAQs.
+ * preconfigured to list the newest FAQs, and the members-only toggle.
  */
 import { registerBlockVariation } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
+
+import './members-only';
 
 const VARIATION_NAME = 'soli-faq/faq-loop';
 const POST_TYPE = 'soli_faq';

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "soli-faq/search",
+  "version": "0.1.0",
+  "title": "FAQ search",
+  "category": "widgets",
+  "icon": "search",
+  "description": "Search field, topic filter and results for the members-only FAQs.",
+  "keywords": [
+    "faq",
+    "veelgestelde vragen",
+    "zoeken"
+  ],
+  "textdomain": "soli-faq",
+  "attributes": {
+    "showTopics": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide"
+    ],
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

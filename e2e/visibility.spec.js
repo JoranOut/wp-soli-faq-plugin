@@ -19,10 +19,17 @@ test.describe('logged-out visitors', () => {
 		expect(response.status()).toBe(403);
 	});
 
-	test('see no FAQs in a query loop', async ({ page }) => {
+	test('see only public FAQs in a query loop', async ({ page }) => {
 		await page.goto(fixtures.pageUrl);
 		await expect(page.locator('body')).toContainText('FAQ overzicht');
+		await expect(page.locator('body')).toContainText('Waar vind ik het Muziekcentrum?');
 		await expect(page.locator('body')).not.toContainText('Geheime FAQ voor leden');
+	});
+
+	test('can read a public single FAQ page', async ({ page }) => {
+		const response = await page.goto(fixtures.publicFaqUrl);
+		expect(response.status()).toBe(200);
+		await expect(page.locator('body')).toContainText('vlak bij het station');
 	});
 
 	test('get a 403 from the REST collection and single endpoints', async ({ page }) => {
