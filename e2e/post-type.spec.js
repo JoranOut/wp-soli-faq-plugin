@@ -39,6 +39,11 @@ test.describe('FAQs post type', () => {
 	test('stores the members-only toggle from the editor sidebar', async ({ page }) => {
 		await page.goto('/wp-admin/post-new.php?post_type=soli_faq');
 		await page.waitForFunction(() => window.wp?.data?.select('core/editor')?.getCurrentPostId());
+		// A fresh user gets the welcome guide modal, which hides the sidebar from role queries.
+		await page.evaluate(() =>
+			window.wp.data.dispatch('core/preferences').set('core/edit-post', 'welcomeGuide', false)
+		);
+		await expect(page.getByRole('dialog', { name: /Welcome to the editor/ })).toHaveCount(0);
 
 		const toggle = page.getByRole('checkbox', { name: 'Members only' });
 		await expect(toggle).toBeChecked();
