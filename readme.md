@@ -21,12 +21,17 @@ Members-only frequently asked questions (FAQs) post type for Soli sites.
 
 ## Description
 
-Registers the `soli_faq` custom post type for frequently asked questions that are
-only visible to logged-in members:
+Registers the `soli_faq` custom post type for frequently asked questions. A FAQ is
+members-only unless you switch off "Members only" in the editor sidebar. For
+logged-out visitors, members-only FAQs are hidden:
 
 - Query Loop blocks and other front-end queries show nothing to logged-out visitors
 - Direct visits to a single FAQ or the archive respond with HTTP 403
 - The REST endpoints require a logged-in user
+
+The **FAQ search** block (`soli-faq/search`) shows a search field, a topic filter
+and the matching questions. Assign topics under FAQs → Topics. Logged-out
+visitors see the public questions and a login link for the rest.
 
 The plugin adds a preconfigured **FAQs** variation of the core Query
 Loop block, so editors can drop the latest FAQs on any (members) page.

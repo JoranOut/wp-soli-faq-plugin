@@ -17,7 +17,7 @@ test.beforeAll(() => {
  */
 const FATAL = /Fatal error|Parse error/i;
 const OWN_FILES =
-	/(Warning|Notice|Deprecated):[^\n]*(wp-soli-faq-plugin\.php|class-soli-faq-(post-type|visibility)\.php)/i;
+	/(Warning|Notice|Deprecated):[^\n]*(wp-soli-faq-plugin\.php|class-soli-faq-(post-type|visibility|search)\.php|search\/render\.php)/i;
 
 async function expectNoPhpErrors(page) {
 	// textContent, never innerText. innerText reflects *rendered* text, so it
@@ -75,6 +75,13 @@ test.describe('renders without PHP errors', () => {
 	test('on a page with the FAQs query loop', async ({ page }) => {
 		await page.goto(fixtures.pageUrl);
 		await expect(page.locator('body')).toContainText('Geheime FAQ voor leden');
+		await expectNoPhpErrors(page);
+	});
+
+	test('on a page with the FAQ search block, while searching', async ({ page }) => {
+		const sep = fixtures.searchPageUrl.includes('?') ? '&' : '?';
+		await page.goto(`${fixtures.searchPageUrl}${sep}faq_search=feest&faq_topic=activiteiten`);
+		await expect(page.locator('.soli-faq-search__result').first()).toBeVisible();
 		await expectNoPhpErrors(page);
 	});
 

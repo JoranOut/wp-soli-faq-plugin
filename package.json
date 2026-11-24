@@ -27,9 +27,17 @@
     "requiresAtLeast": "6.9"
   },
   "devDependencies": {
+    "@wordpress/block-editor": "^20.1.0",
+    "@wordpress/blocks": "^17.2.0",
+    "@wordpress/components": "^45.0.0",
+    "@wordpress/data": "^11.2.0",
     "@wordpress/e2e-test-utils-playwright": "^3.0.0",
+    "@wordpress/editor": "^16.2.0",
     "@wordpress/env": "^12.1.0",
+    "@wordpress/i18n": "^7.2.0",
+    "@wordpress/plugins": "^8.2.0",
     "@wordpress/scripts": "^37.0.0",
+    "@wordpress/server-side-render": "^7.2.0",
     "archiver": "^8.0.0"
   }
 }

@@ -7,12 +7,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Hides FAQs from not-logged-in visitors on every surface:
+ * Hides members-only FAQs from not-logged-in visitors on every surface.
+ * FAQs marked public (Post_Type::PUBLIC_META) stay visible on the single page,
+ * in Query Loops and in the search block:
  *
- * - Query Loop blocks and other secondary WP_Query instances return nothing
- * - The single page responds with HTTP 403; the archive is disabled
- *   (has_archive => false), and a ?post_type= query gets the same 403
- * - The REST endpoints (collection and single) respond with HTTP 403
+ * - Query Loop blocks and other secondary WP_Query instances return only
+ *   public FAQs; queries that mix post types drop FAQs altogether
+ * - A members-only single page responds with HTTP 403; the archive is
+ *   disabled (has_archive => false), and a ?post_type= query gets the same 403
+ * - The REST endpoints (collection and single, plus the topic terms)
+ *   respond with HTTP 403, public or not
+ * - The search block lists public FAQs only, or a login prompt when there
+ *   are none
  *
  * Site search is handled in Post_Type via a per-request exclude_from_search.
  * Logged-in users (any role) see everything; draft/private post statuses keep
@@ -27,8 +33,10 @@ class Visibility {
 	}
 
 	/**
-	 * Empty every logged-out query that targets FAQs, or strip the
-	 * post type when the query mixes multiple types (e.g. REST search).
+	 * Limit every logged-out query that targets only FAQs to public ones, or
+	 * strip the post type when the query mixes types (e.g. REST search):
+	 * the public flag is post meta, and a meta query would filter the other
+	 * types too.
 	 *
 	 * The main query is left alone entirely: single and archive get a 403
 	 * from guard_front_end() (emptying them here would turn that into a
@@ -55,19 +63,31 @@ class Visibility {
 			}
 			$remaining = array_values( array_diff( $post_type, array( Post_Type::POST_TYPE ) ) );
 			if ( empty( $remaining ) ) {
-				$query->set( 'post__in', array( 0 ) );
+				self::only_public( $query );
 			} else {
 				$query->set( 'post_type', $remaining );
 			}
 		} elseif ( Post_Type::POST_TYPE === $post_type ) {
-			$query->set( 'post__in', array( 0 ) );
+			self::only_public( $query );
 		}
 	}
 
+	private static function only_public( $query ) {
+		$clause = array(
+			'key'   => Post_Type::PUBLIC_META,
+			'value' => '1',
+		);
+		$existing = $query->get( 'meta_query' );
+		$query->set(
+			'meta_query',
+			$existing ? array( 'relation' => 'AND', $existing, $clause ) : array( $clause )
+		);
+	}
+
 	/**
-	 * 403 for logged-out visits to a single faq or any main query that
-	 * targets the post type (e.g. ?post_type=soli_faq), following the
-	 * guard pattern in wp-soli-event-plugin.
+	 * 403 for logged-out visits to a members-only single faq or any other
+	 * main query that targets the post type (e.g. ?post_type=soli_faq),
+	 * following the guard pattern in wp-soli-event-plugin.
 	 *
 	 * With has_archive => false, WordPress does not flag a ?post_type=
 	 * request as a post type archive, so the query var is checked
@@ -78,8 +98,11 @@ class Visibility {
 			return;
 		}
 
-		$queried_types = (array) get_query_var( 'post_type' );
-		if ( ! is_singular( Post_Type::POST_TYPE ) && ! in_array( Post_Type::POST_TYPE, $queried_types, true ) ) {
+		if ( is_singular( Post_Type::POST_TYPE ) ) {
+			if ( Post_Type::is_public( get_queried_object() ) ) {
+				return;
+			}
+		} elseif ( ! in_array( Post_Type::POST_TYPE, (array) get_query_var( 'post_type' ), true ) ) {
 			return;
 		}
 
@@ -105,7 +128,9 @@ class Visibility {
 			return $response;
 		}
 
-		if ( 0 !== strpos( $request->get_route(), '/wp/v2/' . Post_Type::REST_BASE ) ) {
+		$route = $request->get_route();
+		if ( 0 !== strpos( $route, '/wp/v2/' . Post_Type::REST_BASE )
+			&& 0 !== strpos( $route, '/wp/v2/' . Post_Type::TAXONOMY_REST_BASE ) ) {
 			return $response;
 		}
 
